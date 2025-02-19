@@ -7,23 +7,6 @@ app = Flask(__name__)
 cnt = 0
 
 
-def plot_graph(x, y):
-    plt.style.use('_mpl-gallery')
-    fig, ax = plt.subplots()
-
-    ax.plot(x, y, linewidth=2.0)
-
-    ax.set(xlim=(0, max(x) + 1), xticks=np.arange(1, 8),
-       ylim=(0, max(y) + 1), yticks=np.arange(1, 8))
-
-    plt.show()
-    global cnt
-    filename = f'static/graph/graph{cnt}.png'
-    plt.savefig(fname=filename)
-    cnt += 1
-    return
-
-
 @app.route('/')
 @app.route('/results', methods=['POST', 'GET'])
 def results():
@@ -91,7 +74,6 @@ def student(name=1):
     return render_template('student.html', **stud)
 
 
-plot_graph([1, 5, 6], [3, 5, 8])
 cnt += 1
 
 
