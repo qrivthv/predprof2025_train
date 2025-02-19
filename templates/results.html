@@ -3,7 +3,25 @@
 {%block content%}
 <main class="">
     <div class="container">
-      {{table|safe}}
+      <details>
+              <summary class="toggle"><span>Фильтры:</span></summary>
+              <form method="POST">
+                  <div class="row g-0">
+                <div class="my-3 col-4">
+                <div class="">
+                  <label class="form-check-label" for="sort" style="width: 100%">параметр сортировки</label>
+                    <select class="form-select" id="sort" name="sort" >
+                        <option value="0" >все участники</option>
+                        <option value="1" >призёры</option>
+                        <option value="2" >победители</option>
+                        <option value="3" >все дипломы</option>
+              </select>
+                  </div>
+              </div>
+                  </div>
+              </form>
+            </details>
+        <div data-id="item-table"></div>
     </div>
 </main>
 {%endblock%}
