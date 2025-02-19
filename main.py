@@ -1,7 +1,6 @@
 from functions import *
 from flask import *
 from math import *
-from matplotlib import *
 
 app = Flask(__name__)
 
@@ -10,14 +9,14 @@ app = Flask(__name__)
 @app.route('/results', methods=['POST', 'GET'])
 def results():
     if request.method == 'GET':
-        dt = [["Болванка1", 100, 0, 50, 100, 20, 60, 0, 0, 0, 330],
-              ["Болванка2", 100, 100, 50, 100, 20, 60, 0, 0, 0, 430]
+        dt = [["Болванка1", 100, 0, 50, 100, 20, 60, 0, 0, 330],
+              ["Болванка2", 100, 100, 50, 100, 20, 60, 0, 0, 430]
               ]
         tour = 2
         grade = 0
         region = 0
         time = 0
-        sorted(dt, key=lambda dt: dt[10])
+        sorted(dt, key=lambda dt: dt[0])
         sorted(dt, key=lambda dt: dt[-1])
         return render_template('res.html', dt=dt, time=time, tour=tour, grade=grade, region=region)
     elif request.method == 'POST':
@@ -54,7 +53,7 @@ def by_school(id = -1):
 
 @app.route('/student/<name>')
 def student(name):
-    table = get_student_info(name)
+    # table = get_student_info(name)
     return render_template('student.html')
 
 
