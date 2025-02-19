@@ -41,9 +41,20 @@
                 <div class="">
                   <label class="form-check-label" for="reg" style="width: 100%">регион</label>
                   <select class="form-select" id="reg" name="min" >
-                <option value="" selected>все регионы</option>
+                <option value="0" selected>все регионы</option>
                 <option value="1" >Москва</option>
-                <option value="2" >Питер</option>
+                <option value="2" >Санкт-Петербург</option>
+              </select>
+                </div>
+              </div>
+                      <div class="my-3 col-4">
+                <div class="">
+                  <label class="form-check-label" for="school" style="width: 100%">школа</label>
+                  <select class="form-select" id="school" name="min" >
+                <option value="0" selected>все школы</option>
+                <option value="1" >Лицей “Вторая школа”</option>
+                <option value="2" >Школа ЦПМ</option>
+                <option value="3" >ФТШ</option>
               </select>
                 </div>
               </div>
@@ -55,8 +66,18 @@
               </div>
                   </div>
                   <div class="my-3 col-4">
+                <div class="">
+                  <label class="form-check-label" for="table" style="width: 100%">оформление табицы</label>
+                  <select class="form-select" id="table" name="min" >
+                <option value="0" >чистая таблица</option>
+                <option value="1" >выделены дипломы</option>
+              </select>
+                </div>
+              </div>
+                  <div class="my-3 col-4">
                   <a class="btn btn-secondary tea" href="/forum">Сбросить</a>
               </div>
+
                   <button type="submit" class="btn btn-primary" style="width:fit-content">Применить</button>
               </form>
             </details>
