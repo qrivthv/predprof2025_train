@@ -1,7 +1,8 @@
 from functions import *
 from flask import *
 from math import *
-
+import matplotlib.pyplot as plt
+import numpy as np
 app = Flask(__name__)
 cnt = 0
 
@@ -91,9 +92,9 @@ def student(name=1):
     return render_template('student.html', **stud)
 
 
-
 plot_graph([1, 5, 6], [3, 5, 8])
 cnt += 1
+
 
 if __name__ == "__main__":
     app.run(port=8080, host="127.0.0.1")
