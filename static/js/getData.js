@@ -2,11 +2,11 @@ async function getRegions(param, order) {
     let request = await fetch("http://localhost:8080/standing/region", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
-        body: {
+        body: JSON.stringify({
             "resFrom": param == "0" ? 464 : param == "1" ? 573 : 0,
             "resTo": param == "0" ? 573 : 801,
-            "order": order
-        }
+            "order": order ? "true" : "false"
+        })
     })
 
     if (!request.ok) {
@@ -23,7 +23,7 @@ async function getRegions(param, order) {
         <th>Параметр</th>
     </tr>`
 
-    table.appendChild(topic)
+    table.innerHTML += topic
 
     for (let el of response) {
         let tr = document.createElement("tr")
@@ -52,13 +52,14 @@ async function getParticipants(options) {
     let request = await fetch("http://localhost:8080/standing/participant", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
-        body: {
-            "tour": tour || "3",
+        body: JSON.stringify({
+            "taskFrom": tour == "1" ? 0 : tour == "2" ? 4 : 0,
+            "taskTo": tour == "1" ? 4 : tour == "2" ? 8 : 8,
             "grade": grade || "all",
             "school": school || "all",
             "region": region || "all",
             "time": time || "all"
-        }
+        })
     })
 
     if (!request.ok) {
@@ -73,18 +74,14 @@ async function getParticipants(options) {
         <th>Место</th>
         <th>Участник</th>
         ${
-        if (tour == "1") {
-        `<th>1</th>
+        tour == "1" ? `<th>1</th>
         <th>2</th>
         <th>3</th>
-        <th>4</th>`
-        } else if (tour == "2") {
+        <th>4</th>` : tour == "2" ?
                 `<th>5</th>
         <th>6</th>
         <th>7</th>
-        <th>8</th>`
-        } else {
-                    `<th>1</th>
+        <th>8</th>` : `<th>1</th>
         <th>2</th>
         <th>3</th>
         <th>4</th>
@@ -108,20 +105,22 @@ async function getParticipants(options) {
 
         let number = (i) => isSmall ? 1 : i % 2
 
+        let place = document.createElement("td")
+        let participant = document.createElement("td")
+        let points = el.points.map(k => +k)
+        let summPoints = points.reduce((a, b) => a + b)
+
+        let status = summPoints >= 573 ? "win" : summPoints >= 464 ? "prize" : "none"
+
         if (decoration) {
-            if (el.status == "win") {
+            if (status == "win") {
                 tr.classList.add(`row-win-${number(i)}`)
-            } else if (el.status == "prize") {
+            } else if (status == "prize") {
                 tr.classList.add(`row-prize-${number(i)}`)
             }
         } else {
             tr.classList.add(`row0${number(i)}`)
         }
-
-        let place = document.createElement("td")
-        let participant = document.createElement("td")
-        let points = el.points.map(k => +k)
-        let summPoints = points.reduce((a, b) => a + b)
 
         place.innerHTML = el.place
         participant.innerHTML = el.participant
@@ -149,7 +148,7 @@ async function getPersonalInformation(firstName, secondName) {
     let request = await fetch("http://localhost:8080/personalInfo", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
-        body: {"firstName": firstName, "secondName": secondName}
+        body: JSON.stringify({"firstName": firstName, "secondName": secondName})
     })
 
     if (!request.ok) {
@@ -177,3 +176,27 @@ async function getPersonalInformation(firstName, secondName) {
     place_fn.innerHTML += response.place_fn
     results.innerHTML += response.results
 }
+
+async function clickShowTable(options) {
+    let decoration = document.querySelector("#table").value
+    let tour = document.querySelector("#tour").value
+    let grade = document.querySelector("#grade").value
+    let school = document.querySelector("#school").value 
+    let region = document.querySelector("#region").value 
+    let time = document.querySelector("#time").value 
+
+    let options = {
+        "decoration": decoration,
+        "tour": tour,
+        "grade": grade,
+        "school": school,
+        "region": region,
+        "time": time
+    }
+
+    let res = await getParticipants(options)
+
+    res.then((k) => document.querySelector(".containerTable").append(k))
+}
+
+document.querySelector("#show_table").addEventListener("click", clickShowTable)
