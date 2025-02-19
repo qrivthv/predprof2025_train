@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 
 {%block content%}
-<main class="{{theme}}">
-    <div class="container {{theme}}">
+<main class="">
+    <div class="container">
       <details>
               <summary class="toggle"><span>Фильтры:</span></summary>
               <form method="POST">
@@ -50,9 +50,9 @@
                   <button type="submit" class="btn btn-primary" style="width:fit-content">Применить</button>
               </form>
             </details>
-      <div class="table-responsive {{theme}}">
+      <div class="table-responsive">
         <br>
-        <table class="table table-striped table-sm {{theme}}">
+        <table class="table table-striped table-sm ">
             {%for result in results%}
           <thead>
             <tr>
@@ -64,8 +64,8 @@
                 <th scope="col">{{result[0][-1]}}</th>
             </tr>
           </thead>
-          <tbody class="{{theme}}">
-            <tr class="{{theme}}">
+          <tbody class="">
+            <tr class="">
               <td scope="col">{{result[1][0]}}</td>
               {%for rr in result[1][1:-2]%}
                 {%if rr%}
