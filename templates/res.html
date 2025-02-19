@@ -10,8 +10,8 @@
                   <div class="row g-0">
                 <div class="my-3 col-4">
                 <div class="">
-                  <label class="form-check-label" for="min" style="width: 100%">тур</label>
-                    <select class="form-select" id="min" name="min" >
+                  <label class="form-check-label" for="tour" style="width: 100%">тур</label>
+                    <select class="form-select" id="tour" name="tour" >
                 <option value="0" selected>Оба тура</option>
                   {%for i in range(1, 3)%}
                   {%if tour == i%}
@@ -26,7 +26,7 @@
                   <div class="my-3 col-4">
                 <div class="">
                   <label class="form-check-label" for="grade" style="width: 100%">класс</label>
-                  <select class="form-select" id="grade" name="min" >
+                  <select class="form-select" id="grade" name="grade" >
                 <option value="0" selected>все ученики</option>
                 <option value="1" >11 класс</option>
                 <option value="2" >10 класс</option>
@@ -40,7 +40,7 @@
                   <div class="my-3 col-4">
                 <div class="">
                   <label class="form-check-label" for="reg" style="width: 100%">регион</label>
-                  <select class="form-select" id="reg" name="min" >
+                  <select class="form-select" id="reg" name="region" >
                 <option value="0" selected>все регионы</option>
                 <option value="1" >Москва</option>
                 <option value="2" >Санкт-Петербург</option>
@@ -50,7 +50,7 @@
                       <div class="my-3 col-4">
                 <div class="">
                   <label class="form-check-label" for="school" style="width: 100%">школа</label>
-                  <select class="form-select" id="school" name="min" >
+                  <select class="form-select" id="school" name="school" >
                 <option value="0" selected>все школы</option>
                 <option value="1" >Лицей “Вторая школа”</option>
                 <option value="2" >Школа ЦПМ</option>
@@ -60,15 +60,15 @@
               </div>
                   <div class="my-3 col-4">
                 <div class="">
-                  <label class="form-check-label" for="month" style="width: 100%">время</label>
-                  <input type="number" id="month" name="month" class="form-control" style="width: fit-content" value="{{month}}">
+                  <label class="form-check-label" for="time" style="width: 100%">время</label>
+                  <input type="number" id="time" name="time" class="form-control" style="width: fit-content" value="{{time}}" max="300" min="0">
                 </div>
               </div>
                   </div>
                   <div class="my-3 col-4">
                 <div class="">
                   <label class="form-check-label" for="table" style="width: 100%">оформление табицы</label>
-                  <select class="form-select" id="table" name="min" >
+                  <select class="form-select" id="table" name="param" >
                 <option value="0" >чистая таблица</option>
                 <option value="1" >выделены дипломы</option>
               </select>

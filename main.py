@@ -17,6 +17,7 @@ def results():
         region = 0
         time = 0
         school = 0
+        param = 0
         sorted(dt, key=lambda dt: dt[0])
         sorted(dt, key=lambda dt: dt[-1])
         return render_template('res.html', dt=dt, time=time, tour=tour, grade=grade, region=region, school=school)
@@ -26,8 +27,11 @@ def results():
         region = request.form['region']
         time = request.form['time']
         school = request.form['school']
+        param = request.form['param']
         if time == "":
             time = 0
+        if param == "":
+            param = 0
         if grade == "":
             grade = 0
         if region == "":
@@ -39,7 +43,7 @@ def results():
         if time > 300:
             time =300
         dt = get_data("result", tour, time, grade, region)
-        sorted(dt, key=lambda dt: dt[0])
+        sorted(dparamt, key=lambda dt: dt[0])
         sorted(dt, key=lambda dt: dt[-1])
         return render_template('res.html', dt=dt, time=time, tour=tour, grade=grade, region=region, school=school)
 

@@ -1,53 +1,30 @@
 {% extends "base.html" %}
 
-{% block content %}
-<div class="profile-container py-5">
-    <div class="container">
-        <div class="profile-header" style="background-color: #a0c4ff;">
-            <div class="profile-header-content">
-                <div class="profile-info">
-                    <h1 class="profile-name" style="color: black">
-                        {{fio}}
-                    </h1>
-                    <p class="profile-username" style="color: black"></p>
-                </div>
-            </div>
-        </div>
+{%block content%}
+    <main>
+        <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center">
+      <div class="col col-lg-9 col-xl-8">
+        <div class="card">
+          <div class="rounded-top text-white d-flex flex-row" style="background-color: #326f31; height:200px;">
 
-        <div class="profile-content">
-            <!-- Left Column -->
-            <div class="profile-sidebar">
-                <!-- About Section -->
-                <div class="profile-section">
-                    <h3>Регион</h3>
-                    <div class="info-card">
-                        {% if region != "" %}
-                        <div class="info-item">
-                            <span>{{region}}</span>
-                        </div>
-                        {% endif %}
-                        {% if school != "" %}
-                        <div class="info-item">
-                            <span>{{school}}</span>
-                        </div>
-                        {% endif %}
-                        {% if grade != "" %}
-                        <div class="info-item">
-                            <span>{{grade}} класс</span>
-                        </div>
-                        {% endif %}
-                    </div>
-                </div>
+            <div class="ms-3" style="margin-top: 130px; color: white">
+              <h3>{{fio}}</h3>
             </div>
-                        <!-- Right Column -->
-            <div class="profile-main">
-                <!-- Courses Section -->
-                <div class="profile-section">
-                    <div class="section-header">
-                        <h3>Результаты</h3>
-                    </div>
-
-                    <h4 class="subsection-title">Первый тур</h4>
+          </div>
+          <div class="card-body p-4 text-black">
+            <div class="mb-5  text-body">
+              <p class="lead fw-normal mb-1">Об участнике</p>
+              <div class="p-4 bg-body-tertiary">
+                <p class="font-italic mb-1" data-id = "item-name">ФИО: {{fio}}</p>
+                <p class="font-italic mb-1" data-id = "item-region">Регион: {{region}}</p>
+                <p class="font-italic mb-1" data-id = "item-school">Школа: {{school}}</p>
+                <p class="font-italic mb-1" data-id = "item-grade">Класс: {{grade}}</p>
+              </div>
+            </div>
+            <div>
+              <h5>Результаты</h5>
+              <h4 class="subsection-title">Первый тур</h4>
                     <div class="cards-grid">
                         <div class="content-card">
                             {{graph1|safe}}
@@ -67,9 +44,11 @@
                             {{graph1|safe}}
                         </div>
                     </div>
-                </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-</div>
+  </div>
+    </main>
 {%endblock%}
