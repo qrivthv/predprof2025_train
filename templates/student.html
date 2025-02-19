@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="profile-container py-5">
+    <div class="container">
+        <!-- Profile Header -->
+        <div class="profile-header" style="background-color: #a0c4ff;">
+            <div class="profile-header-content">
+                <div class="profile-info">
+                    <h1 class="profile-name" style="color: black">
+                        {{fio}}
+                    </h1>
+                    <p class="profile-username" style="color: black"></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="profile-content">
+            <!-- Left Column -->
+            <div class="profile-sidebar">
+                <!-- About Section -->
+                <div class="profile-section">
+                    <h3><i class="fas fa-user me-2"></i>Регион</h3>
+                    <div class="info-card">
+                        {% if region != "" %}
+                        <div class="info-item">
+                            <span>{{region}}</span>
+                        </div>
+                        {% endif %}
+                        {% if school != "" %}
+                        <div class="info-item">
+                            <span>{{school}}</span>
+                        </div>
+                        {% endif %}
+                        {% if grade != "" %}
+                        <div class="info-item">
+                            <span>{{grade}} класс</span>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+                        <!-- Right Column -->
+            <div class="profile-main">
+                <!-- Courses Section -->
+                <div class="profile-section">
+                    <div class="section-header">
+                        <h3><i class="fas fa-graduation-cap me-2"></i>Результаты</h3>
+                    </div>
+
+                    <h4 class="subsection-title">Первый тур</h4>
+                    <div class="cards-grid">
+                        <div class="content-card">
+                            {{graph1|safe}}
+                        </div>
+                    </div>
+
+                    <h4 class="subsection-title">Второй тур</h4>
+                    <div class="cards-grid">
+                        <div class="content-card">
+                            {{graph1|safe}}
+                        </div>
+                    </div>
+
+                    <h4 class="subsection-title">Общие результаты</h4>
+                    <div class="cards-grid">
+                        <div class="content-card">
+                            {{graph1|safe}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}
