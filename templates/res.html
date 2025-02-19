@@ -3,7 +3,53 @@
 {%block content%}
 <main class="{{theme}}">
     <div class="container {{theme}}">
-        <h4>Мои результаты</h4>
+      <details>
+              <summary class="toggle"><span>Фильтры:</span></summary>
+              <form method="POST">
+                <h5>За последние:</h5>
+                  <div class="row g-0">
+                <div class="my-3 col-4">
+                <div class="">
+                  <label class="form-check-label" for="min" style="width: 100%">Минут</label>
+                  <input type="number" id="min" name="min" class="form-control" style="width: fit-content" value="{{min}}">
+                </div>
+              </div>
+                  <div class="my-3 col-4">
+                <div class="">
+                  <label class="form-check-label" for="hour" style="width: 100%">Часов</label>
+                  <input type="number" id="hour" name="hour" class="form-control" style="width: fit-content" value="{{hour}}">
+                </div>
+              </div>
+                  <div class="my-3 col-4">
+                <div class="">
+                  <label class="form-check-label" for="day" style="width: 100%">Дней</label>
+                  <input type="number" id="day" name="day" class="form-control" style="width: fit-content" value="{{day}}">
+                </div>
+              </div>
+                  <div class="my-3 col-4">
+                <div class="">
+                  <label class="form-check-label" for="month" style="width: 100%">Месяцев</label>
+                  <input type="number" id="month" name="month" class="form-control" style="width: fit-content" value="{{month}}">
+                </div>
+              </div>
+                  <div class="my-3 col-4">
+                <div class="">
+                  <label class="form-check-label" for="year" style="width: 100%">Лет</label>
+                  <input type="number" id="year" name="year" class="form-control" style="width: fit-content" value="{{year}}">
+                </div>
+              </div>
+                  </div>
+                              <div class="my-3 col-4">
+                <div class="">
+                  <label class="form-check-label" for="txt" style="width: 100%" value="{{txt}}">Возможно, содержит</label>
+                  <input type="text" id="txt" name="txt" class="form-control" style="width: fit-content" value="{{txt}}">
+                </div>
+
+                  <a class="btn btn-secondary tea" href="/forum">Сбросить</a>
+              </div>
+                  <button type="submit" class="btn btn-primary" style="width:fit-content">Применить</button>
+              </form>
+            </details>
       <div class="table-responsive {{theme}}">
         <br>
         <table class="table table-striped table-sm {{theme}}">
