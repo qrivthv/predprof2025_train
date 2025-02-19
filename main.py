@@ -16,14 +16,16 @@ def results():
         grade = 0
         region = 0
         time = 0
+        school = 0
         sorted(dt, key=lambda dt: dt[0])
         sorted(dt, key=lambda dt: dt[-1])
-        return render_template('res.html', dt=dt, time=time, tour=tour, grade=grade, region=region)
+        return render_template('res.html', dt=dt, time=time, tour=tour, grade=grade, region=region, school=school)
     elif request.method == 'POST':
         tour = request.form['tour']
         grade = request.form['grade']
         region = request.form['region']
         time = request.form['time']
+        school = request.form['school']
         if time == "":
             time = 0
         if grade == "":
@@ -39,22 +41,31 @@ def results():
         dt = get_data("result", tour, time, grade, region)
         sorted(dt, key=lambda dt: dt[0])
         sorted(dt, key=lambda dt: dt[-1])
-        return render_template('res.html', dt=dt, time=time, tour=tour, grade=grade, region=region)
+        return render_template('res.html', dt=dt, time=time, tour=tour, grade=grade, region=region, school=school)
 
 
 @app.route('/schools')
 def by_school(id = -1):
     #dt = get_data("schools", id)
     dt = [['school1', 'Санкт-Петербург', 100, 45, 5], ['school2', 'Санкт-Петербург', 90, 35, 2]]
+    sorted(dt, key=lambda dt: dt[-3])
+    sorted(dt, key=lambda dt: dt[-2])
+    sorted(dt, key=lambda dt: dt[-1])
     #table=get_school_table()
     table = ""
     return render_template('results.html', table=table)
 
 
 @app.route('/student/<name>')
-def student(name):
+def student(name=1):
     # table = get_student_info(name)
-    return render_template('student.html')
+    stud = {
+        "fio": "Иванов Иван Иванович",
+        "region": "Санкт-Петербург",
+        "grade": 10,
+        "school": "ГБОУ XXXX"
+    }
+    return render_template('student.html', **stud)
 
 
 if __name__ == "__main__":
