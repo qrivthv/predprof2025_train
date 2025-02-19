@@ -7,26 +7,25 @@ app = Flask(__name__)
 cnt = 0
 
 
-def plot_graph(x, y):
-    plt.style.use('_mpl-gallery')
-    fig, ax = plt.subplots()
-
-    ax.stairs(y, linewidth=2.5)
-
-    ax.set(xlim=(0, 8), xticks=np.arange(1, 8),
-           ylim=(0, 8), yticks=np.arange(1, 8))
-
-    plt.show()
-    global cnt
-    filename = url_for('static', filename=f'graph/graph{cnt}.png')
-
-    plt.savefig(fname=filename, format='png')
-    cnt += 1
-    return
+# def plot_graph(x, y):
+#     plt.style.use('_mpl-gallery')
+#     fig, ax = plt.subplots()
+#
+#     ax.plot(x, y, linewidth=2.0)
+#
+#     ax.set(xlim=(0, max(x) + 1), xticks=np.arange(1, max(x) + 1),
+#          ylim=(0, max(y) + 1), yticks=np.arange(1, max(y) + 1))
+#
+#     plt.show()
+#     global cnt
+#     filename = f'static/graph/graph{cnt}.png'
+#     plt.savefig(fname=filename)
+#     cnt += 1
+#     return
 
 
 @app.route('/')
-@app.route('/results', methods=['POST', 'GET'])
+@app.route('/res', methods=['POST', 'GET'])
 def results():
     if request.method == 'GET':
         dt = [["Болванка1", 100, 0, 50, 100, 20, 60, 0, 0, 330],
@@ -93,7 +92,6 @@ def student(name=1):
 
 
 plot_graph([1, 5, 6], [3, 5, 8])
-cnt += 1
 
 
 if __name__ == "__main__":
