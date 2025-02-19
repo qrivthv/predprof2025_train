@@ -46,18 +46,17 @@ async function getRegions(param, flag) {
 }
 
 async function getParticipants(options) {
-    let {tournament, class, school, region, time, decoration} = options
+    let {tour, grade, school, region, time, decoration} = options
 
-    let request = await fetch("http://localhost:8080/stateParticipants/get", {
+    let request = await fetch("http://localhost:8080/stateParticipants/post", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: {
-            "tournament": tournament || "both",
-            "class": class || "all",
+            "tour": tour || "3",
+            "grade": grade || "all",
             "school": school || "all",
             "region": region || "all",
-            "time": time || "all",
-            "decoration": decoration || "none"
+            "time": time || "all"
         }
     })
 
@@ -67,15 +66,33 @@ async function getParticipants(options) {
 
     let response = await request.json()
 
-        let table = document.createElement("table")
+    let table = document.createElement("table")
 
     let topic = `<tr>
         <th>Место</th>
         <th>Участник</th>
-        <th>1</th>
+        ${
+        if (tour == "1") {
+        `<th>1</th>
+        <th>2</th>
+        <th>3</th>
+        <th>4</th>`
+        } else if (tour == "2") {
+                `<th>5</th>
+        <th>6</th>
+        <th>7</th>
+        <th>8</th>`
+        } else {
+                    `<th>1</th>
         <th>2</th>
         <th>3</th>
         <th>4</th>
+        <th>5</th>
+        <th>6</th>
+        <th>7</th>
+        <th>8</th>`
+        }
+        }
         <th>Баллы</th>
     </tr>`
 
@@ -102,22 +119,24 @@ async function getParticipants(options) {
 
         let place = document.createElement("td")
         let participant = document.createElement("td")
-        let points1 = document.createElement("td")
-        let points2 = document.createElement("td")
-        let points3 = document.createElement("td")
-        let points4 = document.createElement("td")
-        let summPoints = document.createElement("td")
+        let points = el.points.map(k => +k)
+        let summPoints = points.reduce((a, b) => a + b)
 
         place.innerHTML = el.place
         participant.innerHTML = el.participant
 
-        points1.innerHTML = el.points1
-        points2.innerHTML = el.points2
-        points3.innerHTML = el.points3
-        points4.innerHTML = el.points4
-        summPoints.innerHTML = el.summPoints
+        [place, participant].forEach(k => tr.appendChild(k))
 
-        [place, participant, points1, points2, points3, points4, summPoints].forEach(k => tr.appendChild(k))
+        for (let j = 0; j < points.length; j++) {
+            let point = document.createElement("td")
+            point.innerHTML = points[j]
+            tr.appendChild(point)
+        }
+
+        let summ = document.createElement("td")
+        summ.innerHTML = summPoints
+
+        tr.append(summ)
 
         table.appendChild(tr)
     }
