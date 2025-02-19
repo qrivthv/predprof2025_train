@@ -11,16 +11,15 @@ def plot_graph(x, y):
     plt.style.use('_mpl-gallery')
     fig, ax = plt.subplots()
 
-    ax.stairs(y, linewidth=2.5)
+    ax.plot(x, y, linewidth=2.0)
 
-    ax.set(xlim=(0, 8), xticks=np.arange(1, 8),
-           ylim=(0, 8), yticks=np.arange(1, 8))
+    ax.set(xlim=(0, max(x) + 1), xticks=np.arange(1, 8),
+       ylim=(0, max(y) + 1), yticks=np.arange(1, 8))
 
     plt.show()
     global cnt
-    filename = url_for('static', filename=f'graph/graph{cnt}.png')
-
-    plt.savefig(fname=filename, format='png')
+    filename = f'static/graph/graph{cnt}.png'
+    plt.savefig(fname=filename)
     cnt += 1
     return
 
