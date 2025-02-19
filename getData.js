@@ -1,10 +1,11 @@
-async function getRegions(param, flag) {
-    let request = await fetch("http://localhost:8080/regionState/post", {
+async function getRegions(param, order) {
+    let request = await fetch("http://localhost:8080/standing/region", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: {
-            "param": param,
-            "flag": flag
+            "resFrom": param == "0" ? 464 : param == "1" ? 573 : 0,
+            "resTo": param == "0" ? 573 : 801,
+            "order": order
         }
     })
 
@@ -48,7 +49,7 @@ async function getRegions(param, flag) {
 async function getParticipants(options) {
     let {tour, grade, school, region, time, decoration} = options
 
-    let request = await fetch("http://localhost:8080/stateParticipants/post", {
+    let request = await fetch("http://localhost:8080/standing/participant", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: {
@@ -142,4 +143,37 @@ async function getParticipants(options) {
     }
 
     return table
+}
+
+async function getPersonalInformation(firstName, secondName) {
+    let request = await fetch("http://localhost:8080/personalInfo", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: {"firstName": firstName, "secondName": secondName}
+    })
+
+    if (!request.ok) {
+        console.log("!")
+        return
+    }
+
+    let response = await request.json()
+
+    let name = document.querySelector("p[data-id=item-name]")
+    let region = document.querySelector("p[data-id=item-region]")
+    let grade = document.querySelector("p[data-id=item-grade]")
+    let school = document.querySelector("p[data-id=item-school]")
+    let place1 = document.querySelector("p[data-id=item-place1]")
+    let place2 = document.querySelector("p[data-id=item-place2]")
+    let place_fn = document.querySelector("p[data-id=item-place_fn]")
+    let results = document.querySelector("p[data-id=item-results]")
+
+    name.innerHTML += response.name
+    region.innerHTML += response.region
+    grade.innerHTML += response.grade
+    school.innerHTML += response.school
+    place1.innerHTML += response.place1
+    place2.innerHTML += response.place2
+    place_fn.innerHTML += response.place_fn
+    results.innerHTML += response.results
 }
